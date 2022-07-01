@@ -6,7 +6,9 @@
   font-size: 16px;
 }
 body {
-  background-color: #435165;
+    background: #1488CC;  
+    background: -webkit-linear-gradient(to left, #2B32B2, #1488CC);
+    background: linear-gradient(to left, #2B32B2, #1488CC);
 }
 .login {
   width: 400px;

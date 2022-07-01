@@ -10,9 +10,13 @@ const usersRouter = require("./routes/users");
 const loginRouter = require("./routes/login");
 const indexRouter = require('./routes/index');
 const registerRouter = require('./routes/register');
+const contactsRouter = require('./routes/contacts');
+const verifyToken = require('./middleware/verify-token');
 const db = require("./helper/db.js")();
 const app = express();
+const config = require('./config');
 // view engine setup
+app.set('api-key',config.secret_key);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
@@ -23,6 +27,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/",indexRouter);
+app.use('/contacts',verifyToken,contactsRouter)
 app.use('/login',loginRouter);
 app.use("/users", usersRouter);
 app.use('/register', registerRouter)
