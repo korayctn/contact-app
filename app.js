@@ -6,13 +6,12 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const ContactModel = require("./models/Contact");
 const UserModel = require("./models/User");
-const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const loginRouter = require("./routes/login");
+const indexRouter = require('./routes/index');
 const registerRouter = require('./routes/register');
 const db = require("./helper/db.js")();
 const app = express();
-
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
@@ -23,7 +22,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", loginRouter);
+app.use("/",indexRouter);
+app.use('/login',loginRouter);
 app.use("/users", usersRouter);
 app.use('/register', registerRouter)
 

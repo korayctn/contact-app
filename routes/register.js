@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
-
+const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 
 router.get("/", (req, res) => {
@@ -9,8 +9,7 @@ router.get("/", (req, res) => {
 });
 
 router.post('/submit',(req, res)=>{
-  const username = req.body.username;
-  const password = req.body.password;
+  const {username , password } = req.body;
   const user = new User({
     username : username,
     password : password,
@@ -19,7 +18,7 @@ router.post('/submit',(req, res)=>{
   promise.then((user)=>{
     res.json({msg: 'Success',user: user})
   }).catch((err)=>{
-    res.json({msg: 'User couldn\'t be saved',err:err});
+    res.json({msg: 'User couldn\'t be saved',error:err});
   })
 })
 module.exports = router;
