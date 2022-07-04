@@ -29,9 +29,9 @@ router.post('/auth',(req, res)=>{
                         username
                     }
                     const token = jwt.sign(payload,req.app.get('api-key'),{
-                        expiresIn:720
+                        expiresIn:'1h'
                     })
-                    res.json({msg:'success',token:token});
+                    res.redirect('/contacts?token='+ token)
                 }
             });
             

@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const Users = require('../models/User');
 
 const ContactSchema = new Schema({
+
   userID : {
     type:Schema.Types.ObjectID,
     required:true,
@@ -21,14 +22,16 @@ const ContactSchema = new Schema({
   },
   email:{
     type:String,
-    minLength:15,
+    minLength:6,
     maxLength:30,
+    unique:true
   },
   phoneNum: {
     type: String,
     minLength:10,
     maxLength:10,
     required:true,
+    unique:true
   },
   
 });
