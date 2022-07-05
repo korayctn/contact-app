@@ -1,40 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ContactApp</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0-beta1/css/bootstrap.min.css"
-      integrity="sha512-o/MhoRPVLExxZjCFVBsm17Pkztkzmh7Dp8k7/3JrtNCHh0AQ489kwpfA3dPSHzKDe8YCuEhxXq3Y71eb/o6amg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link rel="stylesheet" href="/stylesheets/contacts.css">
-    
-  </head>
-  <body>
-    
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100&display=swap');
+    *{
+      margin: 0;
+      padding:0;
+      background-color:#1488CC;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+      font-size: 24px;
+    }
+    .buttonContainer{
+      width:30%;
+      display: inline-block;
+    }
+    button{
+      margin: 5px;
+      border: 2px solid white;
+      padding:2px 18px;
+      cursor:pointer;
+    }
+    h1{
+      text-align: center;
+      font-size: 48px;
+      color: white;
+    }
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: rgb(0, 0, 0);
+      opacity: 0.4; /* Firefox */
+    }
+    input{
+      border-radius: 5px;
+      width:240px;
+      padding: 2px;
+    }
+    .allContainer .hiddenPart{
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  
+  <h1>Welcome to contact app</h1><br>
+  <div class="allContainer">
+    <button type="submit">Get all the contacts</button>
+  </div>
 
+
+  <div class="allContainer">
+    <button type="submit">Get contact by id</button>
+    <div class="hiddenPart">
+      <input type="text" placeholder="_id">
+      <button type="submit">Submit</button>
+    </div>
+  </div>
+
+
+
+  <div class="allContainer">
+    <button type="submit">Post new contact</button>
+    <div class="hiddenPart">
+      <input type="text" placeholder="_userId">
+      <input type="text" placeholder="name">
+      <input type="text" placeholder="surname">
+      <input type="text" placeholder="email">
+      <input type="text" placeholder="phoneNum">
+      <button type="submit">Submit</button>
+    </div>
+  </div>
+
+  <div class="allContainer">
+    <button type="submit">Update the contact</button>
+    <div class="hiddenPart">
+      <input type="text" placeholder="_userId">
+      <input type="text" placeholder="name">
+      <input type="text" placeholder="surname">
+      <input type="text" placeholder="email">
+      <input type="text" placeholder="phoneNum">
+      <button type="submit">Submit</button>
+    </div>
+  </div>
+
+  <div class="allContainer">
+    <button type="submit">Delete by id</button>
+    <div class="hiddenPart">
+      <input type="text" placeholder="_id">
+      <button type="submit">Submit</button>
+    </div>
+  </div>
+
+
+  <ul>
     
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0-beta1/js/bootstrap.min.js"
-      integrity="sha512-Hqe3s+yLpqaBbXM6VA0cnj/T56ii5YjNrMT9v+us11Q81L0wzUG0jEMNECtugqNu2Uq5MSttCg0p4KK0kCPVaQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+  </ul>
+</body>
 </html>
