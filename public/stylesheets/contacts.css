@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  font-size: 24px;
+}
+body {
+  background: rgb(63, 94, 251);
+  background: linear-gradient(
+    90deg,
+    rgba(63, 94, 251, 1) 0%,
+    rgba(70, 248, 252, 1) 100%
+  );
+}
+button {
+  font-size: larger;
+  margin: 15px 5px;
+  color: #f9feff;
+  background-color: #020202;
+  padding: 4px 18px;
+  border-radius: 4px;
+}
+.initiators {
+  display: inline-block;
+  font-size: larger;
+  margin: 25px 5px;
+  color: #f9feff;
+  background-color: #020202;
+  padding: 4px 18px;
+  border-radius: 4px;
+}
+.clickable {
+  border: 2px solid #020202;
+}
+.clickable :hover {
+  border: 4px solid white;
+  transition: all 0.4s;
+}
+h1 {
+  text-align: center;
+  font-size: 48px;
+  color: white;
+  margin: 14px;
+}
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(0, 0, 0);
+  opacity: 0.4; /* Firefox */
+}
+input {
+  border-radius: 5px;
+  width: 240px;
+  padding: 2px;
+  font-size: larger;
+}
+.allContainer .hiddenPart {
+  display: none;
+  position: relative;
+  left: 10px;
+}
+
+.cursorBtn {
+  cursor: pointer;
+}

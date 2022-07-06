@@ -1,120 +1,116 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const path = require('path');
-const Contacts = require('../models/Contact');
+const path = require("path");
+const Contacts = require("../models/Contact");
 
 /**
- * 
+ *
  *     ****************** GET METHODS ******************
- * 
+ *
  */
 
-router.get('/',(err,res)=>{
-    res.sendFile(path.join(__dirname, "../views/contacts.html"));
-})
+router.get("/", (err, res) => {
+  res.sendFile(path.join(__dirname, "../views/contacts.html"));
+});
 // GET all contacts
-router.get('/getAll',(req,res)=>{
-    Contacts.find({ },(err,contact)=>{
-        if(err){
-            res.json(err)
-        }
-        else{
-            res.json(contact)
-        }
-    })
-})
+router.get("/getAll", (req, res) => {
+  Contacts.find({}, (err, contact) => {
+    if (err) {
+      res.json(err);
+    } else {
+      res.json(contact);
+    }
+  });
+});
 
 // GET by ObjectID
-router.get('/getById',(req,res)=>{
+router.get("/getById", (req, res) => {
+  const { _id } = req.query;
 
-    const {_id} = req.query;
-
-    Contacts.findById({_id},(err,contact)=>{
-        if(err){
-            throw new err
-        }
-        else if (!contact){
-            res.send('there is no contact');
-        }
-        else{
-            res.json(contact);
-        }
-    })
-})
-
+  Contacts.findById({ _id }, (err, contact) => {
+    if (err) {
+      throw new err();
+    } else if (!contact) {
+      res.send("there is no contact with this id");
+    } else {
+      res.json(contact);
+    }
+  });
+});
 
 /**
- * 
+ *
  *      ****************** POST METHODS ******************
- * 
+ *
  */
 
-// POST new contact 
-router.post('/new',(req,res)=>{
+// POST new contact
+router.post("/new", (req, res) => {
+  const { name, surname, email, phoneNum } = req.body;
 
-    const{name,surname,email,phoneNum} = req.body;
-    
-    const contact = new Contacts({
-        name,
-        surname,
-        email,
-        phoneNum
-    })
-    const promise = contact.save();
+  const contact = new Contacts({
+    name,
+    surname,
+    email,
+    phoneNum,
+  });
+  const promise = contact.save();
 
-    promise.then((contact)=>{
-        res.json(contact);
-    }).catch((err)=>{
-        res.json(err);
+  promise
+    .then((contact) => {
+      res.json(contact);
     })
-})
+    .catch((err) => {
+      res.json(err);
+    });
+});
 /**
- * 
+ *
  *      ****************** DELETE METHODS ******************
- * 
+ *
  */
 
-router.delete('/delById/:_id',(req,res)=>{
+router.delete("/deleteById", (req, res) => {
+  const { _id } = req.body;
 
-    const {_id} = req.params;
-
-    Contacts.findByIdAndDelete(_id,(err,contact)=>{
-        if(err){
-            throw new err
-        }
-        else{
-            res.json({msg:'success',action:'deleted.'})
-        }
-    })
-})
+  Contacts.findByIdAndDelete(_id, (err, contact) => {
+    if (err) {
+      res.json(err);
+    } else if (!contact) {
+      res.send("there is no contact with this id");
+    } else {
+      res.json({ msg: "success", action: "deleted." });
+    }
+  });
+});
 
 /**
- * 
+ *
  *      ****************** PUT METHODS ******************
- * 
+ *
  */
 
-router.put('/updateById/:_id',(req,res)=>{ 
+router.put("/updateById", (req, res) => {
+  const { _id, name, surname, email, phoneNum } = req.body;
 
-    const {_id} = req.params;
-
-    const {userID,name,surname,email,phoneNum} = req.body;
-
-    Contacts.findByIdAndUpdate({_id},{
-        userID : userID,
-        name : name,
-        surname : surname,
-        email : email,
-        phoneNum : phoneNum
-
-    },{new:true},(err,contact)=>{
-        if(err){
-            throw new err
-        }
-        else{
-            res.json(contact);
-        }
-    })
-})
+  Contacts.findByIdAndUpdate(
+    _id,
+    {
+      name,
+      surname,
+      email,
+      phoneNum,
+    },
+    (err, contact) => {
+      if (err) {
+        throw new err();
+      } else if (!contact) {
+        res.send("there is no contact with this id");
+      } else {
+        res.json(contact);
+      }
+    }
+  );
+});
 
 module.exports = router;

@@ -1,147 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100&display=swap');
-    *{
-      margin: 0;
-      padding:0;
-      background-color:#1488CC;
-      box-sizing: border-box;
-      font-family: 'Roboto', sans-serif;
-      font-size: 24px;
-    }
-    .buttonContainer{
-      width:30%;
-      display: inline-block;
-    }
-    button{
-      margin: 5px;
-      border: 2px solid white;
-      padding:2px 18px;
-    }
-    h1{
-      text-align: center;
-      font-size: 48px;
-      color: white;
-    }
-    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-      color: rgb(0, 0, 0);
-      opacity: 0.4; /* Firefox */
-    }
-    input{
-      border-radius: 5px;
-      width:240px;
-      padding: 2px;
-    }
-    .allContainer .hiddenPart{
-      display: inline-block;
-    }
-    .cursorBtn{
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-  
-  <h1>Welcome to contact app</h1><br>
-  <div class="allContainer">
-    <a href="/contacts/getAll">
-      <button type="submit" class="cursorBtn">Get all the contacts</button>
-    </a>
-  </div>
-
-
-  <div class="allContainer">
-
-    <form action="/contacts/getById" method="get">
-      <button type="submit">Get contact by id</button>
-      <div class="hiddenPart">
-        <input type="text" placeholder="_id" name="_id">
-        <button type="submit" class="cursorBtn">Submit</button>
-      </div>
-    </form>
-  </div>
-
-
-
-  <div class="allContainer">
-    <form action="/contacts/new" method="post">
-      <button type="submit">Post new contact</button>
-      <div class="hiddenPart">
-        <input type="text" placeholder="name" name="name">
-        <input type="text" placeholder="surname" name="surname">
-        <input type="email" placeholder="email" name="email">
-        <input type="tel" placeholder="phoneNum" name="phoneNum">
-        <button type="submit" class="cursorBtn">Submit</button>
-      </div>
-    </form>
-  </div>
-
-  <div class="allContainer">
-    <button type="submit">Update the contact</button>
-    <div class="hiddenPart">
-      <input type="text" placeholder="_id" name="_id" id="updateId">
-      <input type="text" placeholder="name" id="newName">
-      <input type="text" placeholder="surname" id="newSurname">
-      <input type="text" placeholder="email" id="newEmail">
-      <input type="text" placeholder="phoneNum" id="newPhoneNum">
-
-      <button type="submit" class="cursorBtn" id="updateButton">Submit</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/contacts.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <h1>Welcome to contact app</h1>
+    <br />
+    <div class="allContainer">
+      <a href="/contacts/getAll">
+        <button type="submit" class="cursorBtn clickable">
+          Get all the contacts
+        </button>
+      </a>
     </div>
-  </div>
 
-  <div class="allContainer">
-    <button type="submit">Delete by id</button>
-    <div class="hiddenPart">
-      <input type="text" placeholder="_id">
-      <button type="submit" class="cursorBtn">Submit</button>
+    <div class="allContainer">
+      <form action="/contacts/getById" method="get">
+        <div id="getContactInitiator" class="initiators">Get contact by id</div>
+
+        <div class="hiddenPart" id="getByIdHidden">
+          <input type="text" placeholder="Id" name="_id" />
+          <button type="submit" class="cursorBtn clickable">Submit</button>
+        </div>
+      </form>
     </div>
-  </div>
 
+    <div class="allContainer">
+      <form action="/contacts/new" method="post">
+        <div id="postContactInitiator" class="initiators">Post new contact</div>
+        <div id="postNewHidden" class="hiddenPart">
+          <input type="text" placeholder="Name" name="name" />
+          <input type="text" placeholder="Surname" name="surname" />
+          <input type="email" placeholder="Email" name="email" />
+          <input type="tel" placeholder="Phone Number" name="phoneNum" />
+          <button type="submit" class="cursorBtn clickable">Submit</button>
+        </div>
+      </form>
+    </div>
 
-  <ul>
-    
-  </ul>
-  <script>
-    
-    const button = document.querySelector('#updateButton');
+    <div class="allContainer">
+      <div id="updateContactInitiator" class="initiators">
+        Update the contact by id
+      </div>
+      <div class="hiddenPart" id="updateHidden">
+        <input type="text" placeholder="Id" name="_id" id="updateId" />
+        <input type="text" placeholder="New Name" id="newName" />
+        <input type="text" placeholder="New Surname" id="newSurname" />
+        <input type="text" placeholder="New Email" id="newEmail" />
+        <input type="text" placeholder="New Phone Number" id="newPhoneNum" />
 
-    button.addEventListener('click', (e)=>{
-        
+        <button type="submit" class="cursorBtn clickable" id="updateButton">
+          Submit
+        </button>
+        <span id="updateStatusSpan"></span>
+      </div>
+    </div>
+
+    <div class="allContainer">
+      <div id="deleteContactInitiator" class="initiators">Delete by id</div>
+      <div class="hiddenPart" id="deleteContactHidden">
+        <input type="text" placeholder="Id" id="deleteId" />
+        <button type="submit" class="cursorBtn clickable" id="buttonDelete">
+          Submit
+        </button>
+        <span id="deleteStatusSpan"></span>
+      </div>
+    </div>
+
+    <ul></ul>
+    <script>
+      $("#getContactInitiator").click(() => {
+        $("#getByIdHidden").toggle(600);
+      });
+      $("#postContactInitiator").click(() => {
+        $("#postNewHidden").toggle(600);
+      });
+      $("#updateContactInitiator").click(() => {
+        $("#updateHidden").toggle(600);
+      });
+      $("#deleteContactInitiator").click(() => {
+        $("#deleteContactHidden").toggle(600);
+      });
+
+      const buttonUpdate = document.querySelector("#updateButton");
+
+      buttonUpdate.addEventListener("click", (e) => {
         e.preventDefault();
-        const _id = document.querySelector('#updateId').val();
-        const newName = document.querySelector('#newName').val();
-        const newSurname = document.querySelector('#newSurname').val();
-        const newEmail= document.querySelector('#newEmail').val();
-        const newPhoneNum = document.querySelector('#newPhoneNum').val();
+        const _id = document.querySelector("#updateId").value;
+        const newName = document.querySelector("#newName").value;
+        const newSurname = document.querySelector("#newSurname").value;
+        const newEmail = document.querySelector("#newEmail").value;
+        const newPhoneNum = document.querySelector("#newPhoneNum").value;
+        const updateStatusSpan = document.querySelector("#updateStatusSpan");
 
-        fetch('http://127.0.0.1:3000/contacts/updateById',{
-            method:'PUT',
-            body: JSON.stringify({
-                '_id' : _id,
-                'name' : newName,
-                'surname' : newSurname,
-                'email' : newEmail,
-                'phoneNum' : newPhoneNum,
-            })
-        }).then((res)=>{
-          if(res.ok){
-            console.log('PUT request is successful')
-          }
-          else{
-            console.log('PUT request is not successful')
-          }
-          return res
+        fetch("http://127.0.0.1:3000/contacts/updateById", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "My-Custom-Header": "contactApp",
+          },
+          body: JSON.stringify({
+            _id: _id,
+            name: newName,
+            surname: newSurname,
+            email: newEmail,
+            phoneNum: newPhoneNum,
+          }),
         })
-          .then(res=>res.json())
-          .then(data => console.log(data))
-    })    .catch(err => res.json(err))
+          .then((res) => {
+            if (res.ok) {
+              console.log("PUT request is successful");
+              updateStatusSpan.innerHTML = "Succesful";
+            } else {
+              console.log("PUT request is not successful");
+              updateStatusSpan.innerHTML = "Not succesful";
+            }
+            return res;
+          })
+          .then((res) => res.json())
+          .then((data) => console.log(data))
+          .catch((err) => res.json(err));
+      });
 
-  </script>
-</body>
+      const deleteButton = document.querySelector("#buttonDelete");
+      const deleteStatusSpan = document.querySelector("#deleteStatusSpan");
+      deleteButton.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const _id = document.getElementById("deleteId").value;
+
+        fetch("http://127.0.0.1:3000/contacts/deleteById", {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            "My-Custom-Header": "contactApp",
+          },
+          body: JSON.stringify({
+            _id: _id,
+          }),
+        })
+          .then((res) => {
+            if (res.ok) {
+              console.log("DELETE request is successful");
+              deleteStatusSpan.innerHTML = "Succesful";
+            } else {
+              console.log("DELETE request is not successful");
+              deleteStatusSpan.innerHTML = "Not succesful";
+            }
+            return res;
+          })
+          .then((res) => res.json())
+          .then((data) => console.log(data))
+          .catch((err) => res.json(err));
+      });
+    </script>
+  </body>
 </html>
