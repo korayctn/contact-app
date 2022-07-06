@@ -6,9 +6,9 @@
   font-size: 16px;
 }
 body {
-    background: #1488CC;  
-    background: -webkit-linear-gradient(to left, #2B32B2, #1488CC);
-    background: linear-gradient(to left, #2B32B2, #1488CC);
+  background: #1488cc;
+  background: -webkit-linear-gradient(to left, #2b32b2, #1488cc);
+  background: linear-gradient(to left, #2b32b2, #1488cc);
 }
 .login {
   width: 400px;
