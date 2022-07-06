@@ -23,7 +23,6 @@
       margin: 5px;
       border: 2px solid white;
       padding:2px 18px;
-      cursor:pointer;
     }
     h1{
       text-align: center;
@@ -42,47 +41,57 @@
     .allContainer .hiddenPart{
       display: inline-block;
     }
+    .cursorBtn{
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
   
   <h1>Welcome to contact app</h1><br>
   <div class="allContainer">
-    <button type="submit">Get all the contacts</button>
+    <a href="/contacts/getAll">
+      <button type="submit" class="cursorBtn">Get all the contacts</button>
+    </a>
   </div>
 
 
   <div class="allContainer">
-    <button type="submit">Get contact by id</button>
-    <div class="hiddenPart">
-      <input type="text" placeholder="_id">
-      <button type="submit">Submit</button>
-    </div>
+
+    <form action="/contacts/getById" method="get">
+      <button type="submit">Get contact by id</button>
+      <div class="hiddenPart">
+        <input type="text" placeholder="_id" name="_id">
+        <button type="submit" class="cursorBtn">Submit</button>
+      </div>
+    </form>
   </div>
 
 
 
   <div class="allContainer">
-    <button type="submit">Post new contact</button>
-    <div class="hiddenPart">
-      <input type="text" placeholder="_userId">
-      <input type="text" placeholder="name">
-      <input type="text" placeholder="surname">
-      <input type="text" placeholder="email">
-      <input type="text" placeholder="phoneNum">
-      <button type="submit">Submit</button>
-    </div>
+    <form action="/contacts/new" method="post">
+      <button type="submit">Post new contact</button>
+      <div class="hiddenPart">
+        <input type="text" placeholder="name" name="name">
+        <input type="text" placeholder="surname" name="surname">
+        <input type="email" placeholder="email" name="email">
+        <input type="tel" placeholder="phoneNum" name="phoneNum">
+        <button type="submit" class="cursorBtn">Submit</button>
+      </div>
+    </form>
   </div>
 
   <div class="allContainer">
     <button type="submit">Update the contact</button>
     <div class="hiddenPart">
-      <input type="text" placeholder="_userId">
-      <input type="text" placeholder="name">
-      <input type="text" placeholder="surname">
-      <input type="text" placeholder="email">
-      <input type="text" placeholder="phoneNum">
-      <button type="submit">Submit</button>
+      <input type="text" placeholder="_id" name="_id" id="updateId">
+      <input type="text" placeholder="name" id="newName">
+      <input type="text" placeholder="surname" id="newSurname">
+      <input type="text" placeholder="email" id="newEmail">
+      <input type="text" placeholder="phoneNum" id="newPhoneNum">
+
+      <button type="submit" class="cursorBtn" id="updateButton">Submit</button>
     </div>
   </div>
 
@@ -90,7 +99,7 @@
     <button type="submit">Delete by id</button>
     <div class="hiddenPart">
       <input type="text" placeholder="_id">
-      <button type="submit">Submit</button>
+      <button type="submit" class="cursorBtn">Submit</button>
     </div>
   </div>
 
@@ -98,5 +107,41 @@
   <ul>
     
   </ul>
+  <script>
+    
+    const button = document.querySelector('#updateButton');
+
+    button.addEventListener('click', (e)=>{
+        
+        e.preventDefault();
+        const _id = document.querySelector('#updateId').val();
+        const newName = document.querySelector('#newName').val();
+        const newSurname = document.querySelector('#newSurname').val();
+        const newEmail= document.querySelector('#newEmail').val();
+        const newPhoneNum = document.querySelector('#newPhoneNum').val();
+
+        fetch('http://127.0.0.1:3000/contacts/updateById',{
+            method:'PUT',
+            body: JSON.stringify({
+                '_id' : _id,
+                'name' : newName,
+                'surname' : newSurname,
+                'email' : newEmail,
+                'phoneNum' : newPhoneNum,
+            })
+        }).then((res)=>{
+          if(res.ok){
+            console.log('PUT request is successful')
+          }
+          else{
+            console.log('PUT request is not successful')
+          }
+          return res
+        })
+          .then(res=>res.json())
+          .then(data => console.log(data))
+    })    .catch(err => res.json(err))
+
+  </script>
 </body>
 </html>

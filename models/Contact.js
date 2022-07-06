@@ -4,10 +4,6 @@ const Users = require('../models/User');
 
 const ContactSchema = new Schema({
 
-  userID : {
-    type:Schema.Types.ObjectID,
-    required:true,
-  },
   name: {
     type: String,
     minLength: 2,
